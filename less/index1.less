@@ -1,0 +1,26 @@
+.loop(@i:1) when(@i<=20){
+  .col-s-@{i}{
+    width:@i*100%/20;
+    float: left;
+  }
+  .loop(@i+1);
+}
+.loop1(@i:1) when(@i<=20){
+  .col-l-@{i}{
+    width:@i*100%/20;
+    float: left;
+  }
+  .loop1(@i+1);
+}
+.loop1();
+@width:982px;
+@media screen and (max-width: 1100px){
+  .kuangyouimgbox{
+    margin: auto;
+    width: @width;
+  }
+  .kuangyouji{
+    margin: auto;
+  }
+  .loop();
+}

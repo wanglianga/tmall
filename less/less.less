@@ -1,0 +1,104 @@
+@import "var.less";                                //引入var.less文件
+*{
+  box-sizing: border-box;
+}
+.container{
+  &{                                               //&代表父容器（container）
+    margin:0 auto;
+    width: @num1;
+  }
+  &-fuild{
+    width: 100%;
+    margin: auto;
+  }
+  &>.row{
+    width: 100%;height: auto;
+    .clearfix;
+  }
+  &-fuild>.row{
+    width: 100%;height: auto;
+    .clearfix;
+  }
+}
+.loop(@type:s,@i:1) when (@i<=@colNum){
+  .container>.row>.col-@{type}-@{i}{
+    width: @i/@colNum*100%;
+    float: left;
+  }
+  .container-fuild>.row>.col-@{type}-@{i}{
+    width: @i/@colNum*100%;
+    float: left;
+  }
+  .loop(@type,@i+1)
+}
+/*小屏*/
+.loop();
+.container>.row>.col-s-hide{
+  display: none;
+}
+.container-fuild>.row>.col-s-hide{
+  display: none;
+}
+/*中屏*/
+@media screen and (min-width: @num1){
+  .container{
+    width: @num1;
+  }
+  .container-fuild{
+    width: @num1;
+  }
+  .loop(m);
+  .container>.row>.col-s-hide{
+    display: block;
+  }
+  .container>.row>.col-l-hide{
+    display: block;
+  }
+  .container>.row>.col-m-hide{
+    display: none;
+  }
+  .container-fuild>.row>.col-s-hide{
+    display: block;
+  }
+  .container-fuild>.row>.col-l-hide{
+    display: block;
+  }
+  .container-fuild>.row>.col-m-hide{
+    display: none;
+  }
+}
+/*大屏*/
+@media screen and (min-width: @num2){
+  .container{
+    width: @num2;
+  }
+  .container-fuild{
+    width: @num2;
+  }
+  .loop(l);
+  .container>.row>.col-s-hide{
+    display: block;
+  }
+  .container>.row>.col-l-hide{
+    display: none;
+  }
+  .container>.row>.col-m-hide{
+    display: block;
+  }
+  .container-fuild>.row>.col-s-hide{
+    display: block;
+  }
+  .container-fuild>.row>.col-l-hide{
+    display: none;
+  }
+  .container-fuild>.row>.col-m-hide{
+    display: block;
+  }
+}
+.clearfix(){                                         //清楚浮动带来的影响，并且在不影响整体布局结构的前提下，撑开父元素
+   &:before,&:after{
+     content: "";
+     display: block;
+     clear: both;
+   }
+}
